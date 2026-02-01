@@ -6,6 +6,7 @@ export default function Navbar() {
     <nav className="flex gap-4">
       <Link href="/">Home</Link>
       <Link href="/posts">Posts</Link>
+      <Link href="/useformstatus-posts/new">Use Form Status</Link>
     </nav>
   );
 }

@@ -15,8 +15,8 @@ export interface CreatePostInput {
   author: string;
 }
 
-/* export interface FormState {
+export interface FormState {
   success: boolean;
   id?: string;
   message?: string;
-} */
+}
