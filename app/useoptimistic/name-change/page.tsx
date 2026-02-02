@@ -8,29 +8,34 @@ export default function UseOptimisticName() {
   const [optimisticName, setOptimisticName] = useOptimistic<string>(name);
 
   const handleSubmit = async (formData: FormData) => {
-    const newName = formData.get("name") as string;
-
+    const newName = formData.get("name");
+    if (typeof newName !== "string" || !newName.trim()) {
+      return;
+    }
     setOptimisticName(newName);
-    const updatedName = await editName(newName);
-    console.log("Updated Name: ", updatedName);
-
-    startTransition(() => {
+    try {
+      const updatedName = await editName(newName);
+      // setName(updatedName);
       setName(newName);
-    });
+    } catch (error) {
+      console.error("Failed to update name:", error);
+      // Optimistic state will revert to `name` on next render
+    }
   };
-
   return (
     <div>
       <h3>Use Optimistic To Update Name</h3>
       <div>
         <span>Your Name: </span>
-        {optimisticName}
-      </div>
-      <div>
         <form action={handleSubmit}>
           <div>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" disabled={name !== optimisticName} />
+          </div>
+          <button type="submit" disabled={name !== optimisticName}>
+            Update Name
+          </button>
+        </form>            <input type="text" name="name" disabled={name !== optimisticName} />
           </div>
         </form>
       </div>

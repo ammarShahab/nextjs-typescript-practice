@@ -34,6 +34,10 @@ export default async function editName(newName: string) {
       message: "No changes made to the name",
     };
   } catch (error) {
-    console.log(error);
+    console.error("Failed to update name:", error);
+    return {
+      success: false,
+      message: "An error occurred while updating the name",
+    };
   }
 }
