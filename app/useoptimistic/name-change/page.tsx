@@ -1,5 +1,5 @@
 "use client";
-import editName from "@/app/actions/updateName";
+import editName from "@/app/actions/editName";
 
 import { startTransition, useOptimistic, useState } from "react";
 
@@ -8,14 +8,15 @@ export default function UseOptimisticName() {
   const [optimisticName, setOptimisticName] = useOptimistic<string>(name);
 
   const handleSubmit = async (formData: FormData) => {
-    const newName = formData.get("name");
-    if (typeof newName !== "string" || !newName.trim()) {
-      return;
-    }
+    const newName = formData.get("name") as string;
+
     setOptimisticName(newName);
     try {
       const updatedName = await editName(newName);
       // setName(updatedName);
+      startTransition(() => {
+        setName(updatedName);
+      });
       setName(newName);
     } catch (error) {
       console.error("Failed to update name:", error);
@@ -26,17 +27,21 @@ export default function UseOptimisticName() {
     <div>
       <h3>Use Optimistic To Update Name</h3>
       <div>
-        <span>Your Name: </span>
+        <p>
+          Your Name: <span>{optimisticName}</span>
+        </p>
         <form action={handleSubmit}>
           <div>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" disabled={name !== optimisticName} />
           </div>
-          <button type="submit" disabled={name !== optimisticName}>
+          <button
+            type="submit"
+            disabled={name !== optimisticName}
+            className="bg-blue-500 rounded-2xl text-white p-2 mt-2"
+          >
             Update Name
           </button>
-        </form>            <input type="text" name="name" disabled={name !== optimisticName} />
-          </div>
         </form>
       </div>
     </div>
