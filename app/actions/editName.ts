@@ -22,11 +22,13 @@ export default async function editName(newName: string) {
       return {
         success: true,
         message: "Name Added successfully",
+        // result: result,
       };
     } else if (result.modifiedCount === 1) {
       return {
         success: true,
         message: "Name Updated successfully",
+        // result: result,
       };
     }
     return {
