@@ -7,6 +7,7 @@ export default function Navbar() {
       <Link href="/">Home</Link>
       <Link href="/posts">Posts</Link>
       <Link href="/useformstatus-posts/new">Use Form Status</Link>
+      <Link href="/useoptimistic">Use Optimistic</Link>
     </nav>
   );
 }
