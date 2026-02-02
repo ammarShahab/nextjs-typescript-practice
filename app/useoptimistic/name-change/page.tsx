@@ -18,9 +18,9 @@ export default function UseOptimisticName() {
       startTransition(() => {
         setName(updatedName);
       });
-      setName(newName);
     } catch (error) {
       console.error("Failed to update name:", error);
+      setOptimisticName(name); // Revert optimistic update on error
     }
   }
   return (

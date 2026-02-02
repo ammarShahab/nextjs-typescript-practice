@@ -1,8 +1,3 @@
-Username = ashahab007_db_user
-Password = Db1SCAJ85BtLUDHC
-
-MONGODB_URI=mongodb+srv://ashahab007_db_user:Db1SCAJ85BtLUDHC@cluster1.mthggmj.mongodb.net/?
-
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
