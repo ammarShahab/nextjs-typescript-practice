@@ -30,6 +30,9 @@ export default function UseOptimisticName() {
         <p>
           Your Name: <span>{optimisticName}</span>
         </p>
+        <p>
+          Real Name: <span>{name}</span>
+        </p>
         <form action={handleSubmit}>
           <div>
             <label htmlFor="name">Name</label>

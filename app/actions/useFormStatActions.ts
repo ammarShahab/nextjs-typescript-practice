@@ -22,6 +22,7 @@ export default async function useFormStatCreatePost(
     title,
     content,
     author,
+    likes: 0,
   };
 
   try {

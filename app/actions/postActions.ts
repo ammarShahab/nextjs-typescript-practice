@@ -8,6 +8,7 @@ export default async function createPost(formData: FormData) {
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
   const author = formData.get("author") as string;
+  const likes = 0;
 
   if (!title || !content || !author) {
     throw new Error("All fields are required");
@@ -17,6 +18,7 @@ export default async function createPost(formData: FormData) {
     title,
     content,
     author,
+    likes,
   };
 
   try {
