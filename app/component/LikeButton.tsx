@@ -2,10 +2,9 @@
 
 import React, { startTransition, useOptimistic, useState } from "react";
 import { toggleLike } from "../actions/toggleLike";
-import { ObjectId } from "mongodb";
 
 interface LikeButtonProps {
-  postId: ObjectId;
+  postId: string;
   initialIsLiked?: boolean;
 }
 

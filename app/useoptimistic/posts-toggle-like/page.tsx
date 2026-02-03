@@ -16,7 +16,7 @@ export default async function LikePage() {
             <p>Content: {post.content}</p>
             <p>Author: {post.author}</p>
             <p>Likes: {post.likes}</p>
-            <LikeButton postId={post._id} />
+            <LikeButton postId={post._id.toString()} />
           </div>
         ))}
       </div>
