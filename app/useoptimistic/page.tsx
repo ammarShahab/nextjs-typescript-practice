@@ -16,6 +16,12 @@ export default function UseOptimisticPage() {
       >
         Use Optimistic Toggle Like
       </Link>
+      <Link
+        href="/useoptimistic/todos"
+        className="bg-blue-500 rounded-xl text-white p-1"
+      >
+        Use Optimistic To Do
+      </Link>
     </div>
   );
 }
