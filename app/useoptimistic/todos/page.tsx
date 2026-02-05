@@ -1,46 +1,69 @@
 "use client";
 
 import { addTodo } from "@/app/actions/todoActions";
-import React, { startTransition, useOptimistic, useState } from "react";
 
-interface Todo {
-  id?: string;
+import { ReactNode, startTransition, useOptimistic, useState } from "react";
+
+export interface Todo {
+  _id?: string;
   text: string;
-  sending: boolean;
+  pending: boolean;
   completed?: boolean;
 }
 
 export default function TodoPage() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([
+    { _id: "1", text: "Learn React", pending: false },
+  ]);
   const [optimisticTodos, setOptimisticTodos] = useOptimistic(
     todos,
-    (currentTodos, newTodo: Todo) => [...currentTodos, newTodo],
+    (currentTodos, newTodo: Todo) => [
+      ...currentTodos,
+      {
+        text: newTodo.text,
+        pending: newTodo.pending,
+      },
+    ],
   );
 
-  const handleTodo = async (formData: FormData) => {
-    const text = formData.get("text") as string;
+  const handleTodo = async (text: string) => {
+    const pending = true;
 
-    setOptimisticTodos({
-      text,
-      sending: true,
+    const newTodo = {
+      text: text,
+      pending: pending,
       completed: false,
-    });
+    };
+
+    console.log(newTodo);
 
     startTransition(async () => {
-      const newTodo = await addTodo(text);
-      setTodos((todos) => [...todos, newTodo]);
+      setOptimisticTodos(newTodo);
+      const saveTodo = await addTodo(text);
+      // console.log("saveTodo", saveTodo);
+
+      setTodos((todos) => [...todos, saveTodo]);
     });
+    // console.log("todos", todos);
   };
   return (
     <div>
       <h3>Todo Page</h3>
       <div>
-        <div>
-          {optimisticTodos.map((todo) => {
-            <p>{todo.text}</p>;
-            <p>{todo.sending}</p>;
-          })}
-        </div>
+        <button
+          onClick={() => handleTodo("New Todo")}
+          className="bg-cyan-400"
+          type="button"
+        >
+          Add To Do
+        </button>{" "}
+        <ul>
+          {optimisticTodos.map((todo, index) => (
+            <li key={todo._id || index + 1}>
+              {todo.text} {todo.pending && "Adding..."}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
