@@ -7,13 +7,13 @@ import { ReactNode, startTransition, useOptimistic, useState } from "react";
 export interface Todo {
   _id?: string;
   text: string;
-  pending: boolean;
+  pending?: boolean;
   completed?: boolean;
 }
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([
-    { _id: "1", text: "Learn React", pending: false },
+    { _id: "1", text: "Learn React" },
   ]);
   const [optimisticTodos, setOptimisticTodos] = useOptimistic(
     todos,
@@ -21,7 +21,7 @@ export default function TodoPage() {
       ...currentTodos,
       {
         text: newTodo.text,
-        pending: newTodo.pending,
+        pending: true,
       },
     ],
   );
