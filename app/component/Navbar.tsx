@@ -8,6 +8,7 @@ export default function Navbar() {
       <Link href="/posts">Posts</Link>
       <Link href="/useformstatus-posts/new">Use Form Status</Link>
       <Link href="/useoptimistic">Use Optimistic</Link>
+      <Link href="/revalidate">Revalidate</Link>
     </nav>
   );
 }

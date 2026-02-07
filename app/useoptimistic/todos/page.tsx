@@ -2,7 +2,7 @@
 
 import { addTodo } from "@/app/actions/todoActions";
 
-import { ReactNode, startTransition, useOptimistic, useState } from "react";
+import { startTransition, useOptimistic, useState } from "react";
 
 export interface Todo {
   _id?: string;
