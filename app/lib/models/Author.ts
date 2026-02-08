@@ -1,6 +1,6 @@
 export interface Authors {
-  id: string;
+  id?: string;
   author_Name: string;
-  birth_year: number;
+  birth_year: string;
   categories: string[];
 }

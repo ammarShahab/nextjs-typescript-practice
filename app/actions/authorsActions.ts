@@ -1,13 +1,14 @@
 "use server";
 
 import { connectDB } from "../lib/db";
+import { Authors } from "../lib/models/Author";
 
 export default async function authorsActions(formData: FormData) {
   const author_Name = formData.get("author_Name") as string;
   const birth_year = formData.get("birth_year") as string;
   const categories = formData.get("categories") as string;
 
-  const authorInfo = {
+  const authorInfo: Authors = {
     author_Name,
     birth_year,
     categories: categories.split(","),
