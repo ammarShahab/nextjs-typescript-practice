@@ -12,6 +12,12 @@ export default function RevalidatePage() {
         >
           Time Based Revalidation Blogs
         </Link>
+        <Link
+          href="/revalidate/revalidateauthorsbypath"
+          className="bg-blue-500 p-2 rounded-xl"
+        >
+          Revalidate Authors By Path
+        </Link>
       </div>
     </div>
   );

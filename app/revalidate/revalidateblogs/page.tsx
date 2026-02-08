@@ -54,7 +54,7 @@ export default async function RevalidateByTime() {
           </div>
         ))}
       </div>
-      <div>
+      <div className="mt-4">
         <Link
           href="/revalidate/revalidateblogs/new"
           className="bg-cyan-500 rounded-xl p-1.5"
