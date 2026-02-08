@@ -4,7 +4,7 @@ import { connectDB } from "../lib/db";
 import { Blog, BlogState } from "../lib/models/Blogs";
 
 export async function revalidateBlogByTime(
-  initialState: any,
+  initialState: BlogState,
   formData: FormData,
 ): Promise<BlogState> {
   const title = formData.get("title") as string;

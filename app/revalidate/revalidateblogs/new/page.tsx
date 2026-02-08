@@ -46,7 +46,11 @@ export default function CreateBlogPage() {
           >
             Submit
           </button>
-          {state.success && state.message}
+          {state.message && (
+            <p className={state.success ? "text-green-600" : "text-red-600"}>
+              {state.message}
+            </p>
+          )}{" "}
         </form>
       </div>
     </div>

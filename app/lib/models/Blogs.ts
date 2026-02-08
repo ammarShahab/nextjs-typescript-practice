@@ -6,7 +6,7 @@ export interface Blog {
 }
 
 export interface BlogState {
-  id?: boolean;
+  id?: string;
   success: boolean;
   message: string;
 }
