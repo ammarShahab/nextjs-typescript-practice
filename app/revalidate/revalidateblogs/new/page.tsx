@@ -32,12 +32,7 @@ export default function CreateBlogPage() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="author">Author</label>
-            <input
-              type="text"
-              id="author"
-              name="author"
-              className="border"
-            />{" "}
+            <input type="text" id="author" name="author" className="border" />
           </div>
           <button
             disabled={pending}
@@ -50,7 +45,7 @@ export default function CreateBlogPage() {
             <p className={state.success ? "text-green-600" : "text-red-600"}>
               {state.message}
             </p>
-          )}{" "}
+          )}
         </form>
       </div>
     </div>

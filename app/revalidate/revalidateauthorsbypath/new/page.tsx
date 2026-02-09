@@ -1,11 +1,23 @@
+"use client";
+
 import authorsActions from "@/app/actions/authorsActions";
+import { useActionState } from "react";
+
+const initialState = {
+  success: false,
+  message: "",
+};
 
 export default function CreateAuthors() {
+  const [state, formAction, pending] = useActionState(
+    authorsActions,
+    initialState,
+  );
   return (
     <div>
       <h3>Create Authors</h3>
       <form
-        action={authorsActions}
+        action={formAction}
         className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden"
       >
         <div className="space-y-4">
@@ -65,9 +77,11 @@ export default function CreateAuthors() {
           <button
             className="bg-emerald-400 p-1.5 rounded-lg mt-3"
             type="submit"
+            disabled={pending}
           >
             Add Authors
           </button>
+          {state.success && state.message}
         </div>
       </form>
     </div>
