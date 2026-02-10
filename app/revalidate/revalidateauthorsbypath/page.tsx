@@ -1,5 +1,5 @@
 import { Authors } from "@/app/lib/models/Author";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag, updateTag } from "next/cache";
 import Link from "next/link";
 
 export async function onRevalidatePath() {
@@ -11,6 +11,7 @@ export async function onRevalidateTag() {
   "use server";
   const tag = "revalidateauthorsbypath";
   revalidateTag(tag, "max");
+  updateTag(tag);
 }
 
 export default async function RevalidateAuthorsPage() {
