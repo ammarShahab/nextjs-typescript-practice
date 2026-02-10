@@ -9,13 +9,16 @@ export async function GET() {
       .find({})
       .sort({ created_at: -1 })
       .toArray();
-    console.log(authors);
-    return NextResponse.json(authors);
+    // The console.log line is removed entirely
+    // Code continues to the next statement    return NextResponse.json(authors);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({
-      success: false,
-      message: "Unable to fetch authors",
-    });
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Unable to fetch authors",
+      },
+      { status: 500 },
+    );
   }
 }

@@ -26,14 +26,13 @@ export default async function authorsActions(
     const authors = await db
       .collection("authors")
       .insertOne({ ...authorInfo, created_at: new Date() });
-    // revalidatePath("/revalidate");
+
     console.log(authors);
 
+    // redirect("/revalidate/revalidateauthorsbypath");
     return { success: true, message: "Authors created successfully" };
   } catch (error) {
     console.error(error);
     return { success: false, message: "Authors creation failed" };
   }
-
-  redirect("/revalidate/revalidateauthorsbypath");
 }
