@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { connectDB } from "../lib/db";
 import { Authors } from "../lib/models/Author";
 import { redirect } from "next/navigation";
