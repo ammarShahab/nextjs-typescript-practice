@@ -6,7 +6,7 @@ import { Authors } from "../lib/models/Author";
 import { redirect } from "next/navigation";
 
 export default async function authorsActions(
-  initialState: any,
+  initialState: object,
   formData: FormData,
 ) {
   const author_Name = formData.get("author_Name") as string;
@@ -21,19 +21,19 @@ export default async function authorsActions(
 
   console.log(authorInfo);
 
-  if (authorInfo) {
-    redirect("/revalidate/revalidateauthorsbypath");
-  }
-
   try {
     const db = await connectDB();
     const authors = await db
       .collection("authors")
       .insertOne({ ...authorInfo, created_at: new Date() });
-    revalidatePath("/revalidate/revalidateauthorsbypath");
+    // revalidatePath("/revalidate");
+    console.log(authors);
+
     return { success: true, message: "Authors created successfully" };
   } catch (error) {
     console.error(error);
     return { success: false, message: "Authors creation failed" };
   }
+
+  redirect("/revalidate/revalidateauthorsbypath");
 }

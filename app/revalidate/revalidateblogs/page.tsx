@@ -25,23 +25,6 @@ export default async function RevalidateByTime() {
   const blogs: Blogs[] = await res.json();
   console.log("blogs", blogs);
 
-  /*  useEffect(() => {
-    async function fetchBlogs() {
-      try {
-        const res = await fetch("/api/revalidateblogs", {
-          cache: "force-cache",
-          next: {
-            revalidate: 20,
-          },
-        });
-        const blogs = await res.json();
-        setBlogsCollections(blogs);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchBlogs();
-  }, []); */
   return (
     <div>
       <h3>Time Based Revalidation Revalidate Blogs</h3>
