@@ -9,8 +9,8 @@ export async function GET() {
       .find({})
       .sort({ created_at: -1 })
       .toArray();
-    // The console.log line is removed entirely
-    // Code continues to the next statement    return NextResponse.json(authors);
+
+    return NextResponse.json(authors);
   } catch (error) {
     console.error(error);
     return NextResponse.json(

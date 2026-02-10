@@ -1,18 +1,26 @@
 import { Authors } from "@/app/lib/models/Author";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import Link from "next/link";
 
 export async function onRevalidatePath() {
   "use server";
   revalidatePath("/revalidate/revalidateauthorsbypath");
 }
-onRevalidatePath();
+
+export async function onRevalidateTag() {
+  "use server";
+  const tag = "revalidateauthorsbypath";
+  revalidateTag(tag, "max");
+}
 
 export default async function RevalidateAuthorsPage() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidateauthors`,
     {
       cache: "force-cache",
+      next: {
+        tags: ["revalidateauthorsbypath"],
+      },
     },
   );
 
@@ -33,7 +41,14 @@ export default async function RevalidateAuthorsPage() {
           </Link>
         </button>
         <form action={onRevalidatePath}>
-          <button className="bg-amber-300 rounded-xl p-1.5">Revalidate</button>
+          <button className="bg-amber-300 rounded-xl p-1.5">
+            Revalidate Path
+          </button>
+        </form>
+        <form action={onRevalidateTag}>
+          <button className="bg-amber-300 rounded-xl p-1.5">
+            Revalidate Tag
+          </button>
         </form>
       </div>
 
