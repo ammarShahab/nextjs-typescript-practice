@@ -11,6 +11,11 @@ export async function onRevalidateTag() {
   "use server";
   const tag = "revalidateauthorsbypath";
   revalidateTag(tag, "max");
+  // updateTag(tag);
+}
+export async function onRevalidateWithUpdateTag() {
+  "use server";
+  const tag = "revalidateauthorsbypath";
   updateTag(tag);
 }
 
@@ -50,6 +55,9 @@ export default async function RevalidateAuthorsPage() {
           <button className="bg-amber-300 rounded-xl p-1.5">
             Revalidate Tag
           </button>
+        </form>
+        <form action={onRevalidateWithUpdateTag}>
+          <button className="bg-amber-300 rounded-xl p-1.5">Update Tag</button>
         </form>
       </div>
 

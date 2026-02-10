@@ -27,11 +27,10 @@ export default async function authorsActions(
       .insertOne({ ...authorInfo, created_at: new Date() });
 
     console.log(authors);
-
-    // redirect("/revalidate/revalidateauthorsbypath");
-    return { success: true, message: "Authors created successfully" };
   } catch (error) {
     console.error(error);
     return { success: false, message: "Authors creation failed" };
   }
+
+  redirect("/revalidate/revalidateauthorsbypath");
 }

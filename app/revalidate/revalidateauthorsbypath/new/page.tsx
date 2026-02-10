@@ -32,6 +32,7 @@ export default function CreateAuthors() {
               //   onChange={handleInputChange}
               placeholder="Enter author's full name"
               className={`mt-2 block w-full px-4 py-3 rounded-lg border-2  focus:ring-2 focus:ring-opacity-50 transition-all duration-200`}
+              required
             />
           </label>
         </div>
@@ -50,6 +51,7 @@ export default function CreateAuthors() {
               min="1500"
               max={new Date().getFullYear()}
               className={`mt-2 block w-full px-4 py-3 rounded-lg border-2  focus:ring-2 focus:ring-opacity-50 transition-all duration-200`}
+              required
             />
 
             <p className="mt-2 text-sm text-gray-500">
@@ -70,6 +72,7 @@ export default function CreateAuthors() {
               //   onChange={handleInputChange}
               placeholder="Sci-Fi"
               className={`mt-2 block w-full px-4 py-3 rounded-lg border-2  focus:ring-2 focus:ring-opacity-50 transition-all duration-200`}
+              required
             />
           </label>
         </div>
