@@ -9,6 +9,7 @@ export default function Navbar() {
       <Link href="/useformstatus-posts/new">Use Form Status</Link>
       <Link href="/useoptimistic">Use Optimistic</Link>
       <Link href="/revalidate">Revalidate</Link>
+      <Link href="/errorhandleproducts">Error Handling For Products</Link>
     </nav>
   );
 }
