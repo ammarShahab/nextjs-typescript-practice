@@ -31,6 +31,5 @@ export default async function authorsActions(
     console.error(error);
     return { success: false, message: "Authors creation failed" };
   }
-
   redirect("/revalidate/revalidateauthorsbypath");
 }
