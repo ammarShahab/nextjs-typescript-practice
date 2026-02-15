@@ -37,9 +37,13 @@ export default function CreateProducts() {
                 state.error.productDescription}
             </p>
           </div>
-          <button type="submit" className="bg-blue-400 rounded-lg p-1">
+          <button
+            type="submit"
+            disabled={pending}
+            className="bg-blue-400 rounded-lg p-1 disabled:opacity-50"
+          >
             {pending ? "Submitting..." : "Submit"}
-          </button>
+          </button>{" "}
           {state.message && (
             <p
               aria-live="polite"

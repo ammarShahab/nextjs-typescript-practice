@@ -29,7 +29,6 @@ export default async function ErrorHandleProducts() {
   }
 
   const products: Product[] = await res.json();
-  console.log(products);
 
   return (
     <div className="p-4">
