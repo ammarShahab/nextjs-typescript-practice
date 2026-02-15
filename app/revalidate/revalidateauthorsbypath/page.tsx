@@ -61,7 +61,7 @@ export default async function RevalidateAuthorsPage() {
         </form>
       </div>
 
-      <div className="max-w-[720px] mx-auto mt-5">
+      <div className="max-w-180 mx-auto mt-5">
         <div className="relative flex flex-col w-full h-full overflow-scroll text-slate-300 bg-slate-800 shadow-md rounded-lg bg-clip-border">
           <table className="w-full text-left table-auto min-w-max">
             <thead>

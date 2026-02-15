@@ -1,3 +1,5 @@
+"use server";
+
 import { connectDB } from "../lib/db";
 
 interface FormState {
@@ -9,7 +11,7 @@ interface FormState {
   };
 }
 
-export default async function productActions(
+export async function productActions(
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
