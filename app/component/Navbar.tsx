@@ -11,6 +11,9 @@ export default function Navbar() {
       <Link href="/revalidate">Revalidate</Link>
       <Link href="/errorhandleproducts">Error Handling For Products</Link>
       <Link href="/lazy-loading">Lazy-Loading</Link>
+      <Link href="/lazy-loading-ext-lib">
+        Lazy-Loading with external library
+      </Link>
     </nav>
   );
 }
