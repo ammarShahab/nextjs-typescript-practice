@@ -3,13 +3,14 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <nav className="flex gap-4">
+    <nav className="flex gap-6">
       <Link href="/">Home</Link>
       <Link href="/posts">Posts</Link>
       <Link href="/useformstatus-posts/new">Use Form Status</Link>
       <Link href="/useoptimistic">Use Optimistic</Link>
       <Link href="/revalidate">Revalidate</Link>
       <Link href="/errorhandleproducts">Error Handling For Products</Link>
+      <Link href="/lazy-loading">Lazy-Loading</Link>
     </nav>
   );
 }
