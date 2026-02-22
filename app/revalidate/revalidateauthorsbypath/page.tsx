@@ -9,13 +9,13 @@ export async function onRevalidatePath() {
 
 export async function onRevalidateTag() {
   "use server";
-  const tag = "revalidateauthorsbypath";
+  const tag = "authors";
   revalidateTag(tag, "max");
   // updateTag(tag);
 }
 export async function onRevalidateWithUpdateTag() {
   "use server";
-  const tag = "revalidateauthorsbypath";
+  const tag = "authors";
   updateTag(tag);
 }
 
@@ -25,7 +25,7 @@ export default async function RevalidateAuthorsPage() {
     {
       cache: "force-cache",
       next: {
-        tags: ["revalidateauthorsbypath"],
+        tags: ["authors"],
       },
     },
   );

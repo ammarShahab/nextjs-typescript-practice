@@ -13,6 +13,7 @@ export default function CreateBlogPage() {
     revalidateBlogByTime,
     initialState,
   );
+
   return (
     <div>
       <h3>Create Blog Page</h3>
