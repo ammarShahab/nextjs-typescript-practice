@@ -5,7 +5,7 @@ import { useState } from "react";
 import Loading from "../component/Loading";
 
 export default function LazyLoading() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const DynamicModal = dynamic(() => import("../component/Modal"), {
     loading: () => <Loading />,
     ssr: false,
