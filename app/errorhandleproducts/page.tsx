@@ -28,7 +28,7 @@ export default async function ErrorHandleProducts() {
     );
   }
 
-  const products: Product[] = await res.json();
+  const products: Product[] = await res.json(); // To check the error boundary i.e error.tsx is working or not, change the await res.json() to await res.json() + 1
 
   return (
     <div className="p-4">
