@@ -1,5 +1,6 @@
 "use server";
 
+import { ObjectId } from "mongodb";
 import { connectDB } from "../lib/db";
 
 export async function addTodo(text: string) {
@@ -17,4 +18,12 @@ export async function addTodo(text: string) {
     text,
     completed: false,
   };
+}
+
+export async function deleteTodo(id: string) {
+  const db = await connectDB();
+
+  const query = { _id: new ObjectId(id) };
+  await db.collection("todos").deleteOne(query);
+  return id;
 }
