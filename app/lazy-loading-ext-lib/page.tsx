@@ -1,8 +1,14 @@
 "use client";
 import { useState } from "react";
 
+interface SearchResult {
+  item: string;
+  refIndex: number;
+  score?: number;
+}
+
 export default function LazyLoadingWithExternalLibraries() {
-  const [result, setResult] = useState<any>();
+  const [result, setResult] = useState<SearchResult[]>();
   const names = ["Tim", "Bob", "John", "Alice", "Sophia", "David", "Eva"];
   return (
     <div className="max-w-2xl mx-auto">
