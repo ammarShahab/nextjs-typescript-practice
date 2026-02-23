@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import SignIn from "./SignIn";
 
 export default function Navbar() {
   return (
@@ -15,6 +15,7 @@ export default function Navbar() {
       <Link href="/lazy-loading-ext-lib">
         Lazy-Loading with external library
       </Link>
+      <SignIn />
     </nav>
   );
 }
