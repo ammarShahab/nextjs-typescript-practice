@@ -6,7 +6,7 @@ export default function SignIn() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <p>Laoding...</p>;
   }
 
   if (session) {

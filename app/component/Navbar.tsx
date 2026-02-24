@@ -3,7 +3,7 @@ import SignIn from "./SignIn";
 
 export default function Navbar() {
   return (
-    <nav className="flex gap-6">
+    <nav className="flex gap-6 justify-center items-center">
       <Link href="/">Home</Link>
       <Link href="/posts">Posts</Link>
       <Link href="/simple-movies-likes">Simple Movies Likes</Link>
