@@ -4,9 +4,9 @@ import { signIn, useSession } from "next-auth/react";
 export default function GoogleSignIn() {
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
+  /* if (status === "loading") {
     return <p>Loading...</p>;
-  }
+  } */
 
   return (
     <div>
@@ -38,7 +38,8 @@ export default function GoogleSignIn() {
             d="M43.6 20.5H42V20H24v8h11.3c-1.1 3.1-3.2 5.6-6.1 7.1l.1.1 6.2 5.1C33.9 42.6 44 36 44 24c0-1.3-.1-2.7-.4-3.5z"
           />
         </svg>
-        Continue with Google
+
+        {status === "loading" ? <p>Loading...</p> : <p>Continue with Google</p>}
       </button>
     </div>
   );
