@@ -1,8 +1,17 @@
 import Link from "next/link";
 import { connectDB } from "../lib/db";
 import { Post } from "../lib/models/Post";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function PostPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
+
   const db = await connectDB();
   const posts = await db
     .collection<Post>("posts")
