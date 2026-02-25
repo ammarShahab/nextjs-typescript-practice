@@ -18,7 +18,7 @@ export default async function authorsActions(
     categories: categories.split(","),
   };
 
-  console.log(authorInfo);
+  // console.log(authorInfo);
 
   try {
     const db = await connectDB();
@@ -26,7 +26,7 @@ export default async function authorsActions(
       .collection("authors")
       .insertOne({ ...authorInfo, created_at: new Date() });
 
-    console.log(authors);
+    // console.log(authors);
   } catch (error) {
     console.error(error);
     return { success: false, message: "Authors creation failed" };

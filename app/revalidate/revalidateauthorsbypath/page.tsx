@@ -35,7 +35,7 @@ export default async function RevalidateAuthorsPage() {
   }
 
   const authors: Authors[] = await res.json();
-  console.log(authors);
+  // console.log(authors);
 
   return (
     <div>

@@ -3,7 +3,7 @@
 import { connectDB } from "../lib/db";
 
 export default async function editName(newName: string) {
-  console.log(newName);
+  // console.log(newName);
   // We should update the document regardless of current name (assuming there's only one document)
   // Or find the existing document first
   const filter = {}; // Empty filter to match any document (assuming collection has only one user)

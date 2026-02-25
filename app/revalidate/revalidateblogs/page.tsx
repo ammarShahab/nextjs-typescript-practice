@@ -23,7 +23,7 @@ export default async function RevalidateByTime() {
     throw new Error(`Failed to fetch Blogs: ${res.status}`);
   }
   const blogs: Blogs[] = await res.json();
-  console.log("blogs", blogs);
+  // console.log("blogs", blogs);
 
   return (
     <div>

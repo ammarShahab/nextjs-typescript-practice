@@ -5,7 +5,7 @@ import MovieLikeButton from "../component/MovieLikeButton";
 export default async function ShowMovies() {
   const db = await connectDB();
   const moviesCollection = await db.collection("movies").find().toArray();
-  console.log(moviesCollection);
+  // console.log(moviesCollection);
 
   return (
     <div className="max-w-5xl mx-auto">

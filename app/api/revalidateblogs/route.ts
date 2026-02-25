@@ -9,7 +9,7 @@ export async function GET() {
       .find({})
       .sort({ created_at: -1 })
       .toArray();
-    console.log(blogs);
+    // console.log(blogs);
 
     return NextResponse.json(blogs);
   } catch (error) {

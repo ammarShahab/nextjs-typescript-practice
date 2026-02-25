@@ -22,7 +22,7 @@ export default async function createMoviesWithLikes(
     likes,
   };
 
-  console.log("Movies Data", moviesData);
+  // console.log("Movies Data", moviesData);
 
   try {
     const db = await connectDB();
