@@ -1,8 +1,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/app/lib/db";
 import bcrypt from "bcryptjs";
+import Credentials from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    CredentialsProvider({
+    Credentials({
       name: "Credentials",
       credentials: {
         // name: { label: "Name", type: "text" },
@@ -19,31 +19,21 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (
-          // !credentials?.name ||
-          !credentials?.email ||
-          !credentials?.password
-        ) {
-          throw new Error("Please enter email and password");
-        }
+        if (!credentials?.email || !credentials?.password) return null;
 
         const db = await connectDB();
         const user = await db
           .collection("users")
           .findOne({ email: credentials.email });
 
-        if (!user) {
-          throw new Error("User not found in Database");
-        }
+        if (!user) return null;
 
         const isValidPassword = await bcrypt.compare(
           credentials.password,
-          user.password,
+          user.password
         );
 
-        if (!isValidPassword) {
-          throw new Error("Invalid password");
-        }
+        if (!isValidPassword) return null;
 
         return {
           id: user._id.toString(),
@@ -55,6 +45,9 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  pages: {
+    signIn: "/signin",
   },
 };
 

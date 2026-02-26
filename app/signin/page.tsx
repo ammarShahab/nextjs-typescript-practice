@@ -21,7 +21,7 @@ export default function LoginForm() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    console.log(email, password);
+    // console.log(email, password);
 
     const result = await signIn("credentials", {
       email,
@@ -29,8 +29,10 @@ export default function LoginForm() {
       redirect: false,
     });
 
+    console.log("Result", result);
+
     if (result?.error) {
-      setError(result.error);
+      setError("Invalid email or password");
       setIsLoading(false);
       return;
     }
@@ -57,6 +59,7 @@ export default function LoginForm() {
             </label>
             <input
               type="email"
+              name="email"
               placeholder="Enter your email"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -69,6 +72,7 @@ export default function LoginForm() {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="Enter your password"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
