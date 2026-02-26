@@ -26,7 +26,7 @@ export default async function Navbar() {
           <SignOutButton />
         </div>
       ) : (
-        <Link href="/api/auth/signin">
+        <Link href="/signin">
           <button
             type="button"
             className="px-8 py-2 font-semibold border rounded dark:border-gray-800 dark:text-gray-800"

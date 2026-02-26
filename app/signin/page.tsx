@@ -1,6 +1,44 @@
+"use client";
+
 import GoogleSignIn from "@/app/component/GoogleSignIn";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { useState } from "react";
 
 export default function LoginForm() {
+  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    console.log(email, password);
+
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      setError(result.error);
+      setIsLoading(false);
+      return;
+    }
+
+    router.push("/");
+    router.refresh();
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
@@ -10,8 +48,9 @@ export default function LoginForm() {
         </h2>
 
         {/* Form */}
-        <form className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Email
@@ -37,11 +76,17 @@ export default function LoginForm() {
 
           {/* Sign In Button */}
           <button
-            type="button"
+            type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
           >
-            Sign In
+            {isLoading ? "Signing In..." : "Sign In"}
           </button>
+          <p>
+            Don't Have an Account?{" "}
+            <Link href="/signup" className="text-blue-700 underline ">
+              Sign Up
+            </Link>
+          </p>
         </form>
 
         {/* Divider */}
