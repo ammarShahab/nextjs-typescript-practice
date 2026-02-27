@@ -8,7 +8,7 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className="flex gap-4 justify-center items-center">
+    <nav className="flex gap-4 justify-center items-center text-[12px]">
       <Link href="/">Home</Link>
       <Link href="/posts">Posts</Link>
       <Link href="/simple-movies-likes">Simple Movies Likes</Link>
@@ -20,6 +20,7 @@ export default async function Navbar() {
       <Link href="/lazy-loading-ext-lib">
         Lazy-Loading with external library
       </Link>
+      {session?.user?.email && <Link href="/dashboard">Dashboard</Link>}
       {session ? (
         <div>
           <p className="text-[11px]">{session?.user?.name}</p>
