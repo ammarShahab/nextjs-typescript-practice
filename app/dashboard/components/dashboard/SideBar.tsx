@@ -12,6 +12,7 @@ export default function SideBar() {
   const navItems: NavItems[] = [
     { label: "Products", href: "/dashboard/products" },
     { label: "Settings", href: "/dashboard/settings" },
+    { label: "Admin", href: "/dashboard/Admin" },
   ];
 
   const pathname = usePathname();
