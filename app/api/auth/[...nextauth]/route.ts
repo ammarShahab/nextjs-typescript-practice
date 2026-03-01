@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
 
         const isValidPassword = await bcrypt.compare(
           credentials.password,
-          user.password,
+          user.password
         );
 
         if (!isValidPassword) return null;
@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
           id: user._id.toString(),
           name: user.name,
           email: user.email,
+          role: user.role, // ✅ Add role here
         };
       },
     }),
@@ -51,6 +52,8 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account, user }) {
+      console.log("account", account);
+
       if (account?.provider === "google") {
         try {
           const db = await connectDB();
@@ -85,8 +88,6 @@ export const authOptions: NextAuthOptions = {
             .collection("users")
             .findOne({ email: user.email });
           token.role = dbUser?.role ?? "admin";
-
-          token.role = user.role;
         }
       }
       return token;

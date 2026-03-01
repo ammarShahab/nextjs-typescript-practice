@@ -1,6 +1,6 @@
 "use client";
 
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,7 +11,9 @@ interface NavItems {
 }
 
 export default function SideBar() {
-  const { data: session } = getSession();
+  const { data: session } = useSession();
+  console.log("SESSION", session);
+
   const navItems: NavItems[] = [
     { label: "Home", href: "/", role: null },
     { label: "Products", href: "/dashboard/products", role: "user" },
@@ -22,6 +24,8 @@ export default function SideBar() {
   const pathname = usePathname();
 
   const userRole = session?.user?.role;
+
+  console.log("User Role", userRole);
 
   // Filter nav items based on role
   const visibleItems = navItems.filter((item) => {
