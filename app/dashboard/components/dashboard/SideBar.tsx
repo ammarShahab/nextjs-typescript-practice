@@ -23,15 +23,19 @@ export default function SideBar() {
 
   const userRole = session?.user?.role;
 
-  const filteredNavItems = navItems.filter((item) => {
-    if (item.role === null) return true;
-    return item.role === userRole;
+  // Filter nav items based on role
+  const visibleItems = navItems.filter((item) => {
+    if (item.role === null) return true; // public item
+    if (!session) return false; // not logged in
+    if (item.role === "user") return true; // any logged-in user
+    if (item.role === "admin") return userRole === "admin"; // admin only
+    return false;
   });
   return (
     <aside className="border-r border-slate-500 w-72 min-h-screen">
       <div>{/* <h3>SideBar</h3> */}</div>
       <div className="flex flex-col gap-2">
-        {filteredNavItems.map((item): React.ReactNode => {
+        {visibleItems.map((item): React.ReactNode => {
           const isActive = pathname === item.href;
           return (
             <Link
