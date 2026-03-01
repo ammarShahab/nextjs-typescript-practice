@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
 
         const isValidPassword = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password,
         );
 
         if (!isValidPassword) return null;
@@ -48,6 +48,55 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/signin",
+  },
+  callbacks: {
+    async signIn({ account, user }) {
+      if (account?.provider === "google") {
+        try {
+          const db = await connectDB();
+          const existingUser = await db
+            .collection("users")
+            .findOne({ email: user.email });
+
+          if (!existingUser) {
+            await db.collection("users").insertOne({
+              name: user.name,
+              email: user.email,
+              image: user.image,
+              role: "admin",
+              created_at: new Date(),
+            });
+          }
+        } catch (error) {
+          console.error("Error Saving Google User", error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account }) {
+      if (user) {
+        if (account?.provider === "credentials") {
+          token.role = user.role;
+        }
+        if (account?.provider === "google") {
+          const db = await connectDB();
+          const dbUser = await db
+            .collection("users")
+            .findOne({ email: user.email });
+          token.role = dbUser?.role ?? "admin";
+
+          token.role = user.role;
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role as string;
+      }
+      return session;
+    },
   },
 };
 

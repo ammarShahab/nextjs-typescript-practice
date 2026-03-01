@@ -16,6 +16,8 @@ export default async function proxy(req: NextRequest) {
   if (pathName.startsWith("/dashboard")) {
     if (!token) {
       return NextResponse.redirect(new URL("/signin", req.url));
+    } else if (token && token.role !== "admin") {
+      return NextResponse.redirect(new URL("/", req.url));
     }
   }
   return NextResponse.next();
