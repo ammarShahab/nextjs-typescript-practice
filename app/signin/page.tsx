@@ -3,14 +3,29 @@
 import GoogleSignIn from "@/app/component/GoogleSignIn";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { useState } from "react";
+const errorMessages: Record<string, string> = {
+  OAuthAccountNotLinked:
+    "To confirm your identity, sign in with the same account you used originally.",
+  CredentialsSignin:
+    "Sign in failed. Check the details you provided are correct.",
+  default: "Unable to sign in.",
+};
 
 export default function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const searchParams = useSearchParams();
+
+  const errorUrl = searchParams.get("error");
+
+  const errorUrlMessage = errorUrl
+    ? errorMessages[errorUrl] ?? errorMessages.default
+    : null;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,13 +47,16 @@ export default function LoginForm() {
     console.log("Result", result);
 
     if (result?.error) {
-      setError("Invalid email or password");
+      // Map result.error directly to your errorMessages
+      setError(errorMessages[result.error] ?? errorMessages.default);
       setIsLoading(false);
       return;
     }
 
     router.push("/");
     router.refresh();
+
+    console.log("Error URL Message", errorUrlMessage);
   };
 
   return (
@@ -52,7 +70,9 @@ export default function LoginForm() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email */}
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {(error || errorUrlMessage) && (
+            <p className="text-red-500 text-sm">{error ?? errorUrlMessage}</p>
+          )}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Email
