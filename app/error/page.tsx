@@ -1,8 +1,12 @@
 "use client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function ErrorPage() {
+  const { data: session } = useSession();
+  console.log("error", session);
+
   const errorMessages: Record<string, string> = {
     OAuthSignin: "Try signing with a different account.",
     OAuthCallback: "Try signing with a different account.",
@@ -28,10 +32,15 @@ export default function ErrorPage() {
         <p className="text-center font-bold text-red-600">{errorMessage}</p>
       </div>
       <div className="flex gap-4">
-        <Link className="rounded-xl bg-neutral-900 text-white" href="/signin">
-          Go To Sign In
-        </Link>
-        <Link className="rounded-xl bg-neutral-900 text-white" href="/">
+        {!session && (
+          <Link
+            className="rounded-xl bg-neutral-900 text-white p-2"
+            href="/signin"
+          >
+            Go To Sign In
+          </Link>
+        )}
+        <Link className="rounded-xl bg-neutral-900 text-white p-2" href="/">
           Go To Home
         </Link>
       </div>

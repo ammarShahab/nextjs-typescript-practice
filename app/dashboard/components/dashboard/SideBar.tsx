@@ -44,7 +44,7 @@ export default function SideBar() {
           return (
             <Link
               key={item.href}
-              className={isActive ? "bg-gray-900 mt-1.5 mb-1.5" : ""}
+              className={isActive ? "bg-gray-900 text-white" : ""}
               href={item.href}
             >
               {item.label}

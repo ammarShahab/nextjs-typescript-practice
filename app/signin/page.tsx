@@ -24,7 +24,7 @@ export default function LoginForm() {
   const errorUrl = searchParams.get("error");
 
   const errorUrlMessage = errorUrl
-    ? errorMessages[errorUrl] ?? errorMessages.default
+    ? (errorMessages[errorUrl] ?? errorMessages.default)
     : null;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +53,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.push("/");
+    router.push("/dashboard");
     router.refresh();
 
     console.log("Error URL Message", errorUrlMessage);
