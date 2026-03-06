@@ -31,5 +31,5 @@ export default async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/signin", "/signup"],
+  matcher: ["/dashboard/:path*", "/signin", "/signup", "/image-upload-form"],
 };

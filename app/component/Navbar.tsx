@@ -21,6 +21,9 @@ export default async function Navbar() {
         Lazy-Loading with external library
       </Link>
       {session?.user?.email && <Link href="/dashboard">Dashboard</Link>}
+      {session?.user?.email && (
+        <Link href="/image-upload-form">Image Upload</Link>
+      )}
       {session ? (
         <div>
           <p className="text-[11px]">{session?.user?.name}</p>
