@@ -11,6 +11,7 @@ let options = {
     strict: true,
     deprecationErrors: true,
   },
+  family: 4,
 };
 
 let client: MongoClient;
