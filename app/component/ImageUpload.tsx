@@ -68,6 +68,7 @@ export default function ImageUpload() {
           accept="image/jpeg,image/png,image/webp"
           onChange={handleFileChange}
           className="w-full border p-2 rounded"
+          placeholder="Upload"
         />
 
         {/* Local preview before upload */}
